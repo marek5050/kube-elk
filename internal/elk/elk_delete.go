@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	cm "github.com/marek5050/kube-elk/internal/configmap"
 	deploy "github.com/marek5050/kube-elk/internal/deploy"
+	ns "github.com/marek5050/kube-elk/internal/namespace"
 	pvc "github.com/marek5050/kube-elk/internal/pvc"
 	svc "github.com/marek5050/kube-elk/internal/service"
-	ns "github.com/marek5050/kube-elk/internal/namespace"
 	apiv1 "k8s.io/api/core/v1"
 	//pv "github.com/marek5050/kube-elk/internal/pv"
-	log "github.com/sirupsen/logrus"
-	"k8s.io/api/extensions/v1beta1"
 	"github.com/marek5050/kube-elk/internal/ingress"
 	"github.com/marek5050/kube-elk/internal/secret"
+	log "github.com/sirupsen/logrus"
+	"k8s.io/api/extensions/v1beta1"
 )
 
-func ServicesDelete(elkconfig *ElkConfig ) {
+func ServicesDelete(elkconfig *ElkConfig) {
 	var org = elkconfig.Org
 	raw := GetConfig("./base/kib-service.json", org)
 
@@ -131,7 +131,7 @@ func NamespaceDelete(elkconfig *ElkConfig) {
 	err := ns.NamespaceDelete(Clientset, org)
 
 	if err != nil {
-		log.Errorf("failed to delete Namespace: %s", org )
+		log.Errorf("failed to delete Namespace: %s", org)
 	} else {
 		log.Info("Deploy: Delete: LS")
 	}
@@ -190,7 +190,7 @@ func IngressDelete(elkconfig *ElkConfig) {
 
 	var _pv = &v1beta1.Ingress{}
 	json.Unmarshal(raw, &_pv)
-	err = ingress.IngressDelete(Clientset,org,_pv.Name)
+	err = ingress.IngressDelete(Clientset, org, _pv.Name)
 
 	if err != nil {
 		log.Error("failed: IngressDelete")
@@ -207,7 +207,7 @@ func UserDelete(elkconfig *ElkConfig) {
 
 	var _pv = &apiv1.Secret{}
 	json.Unmarshal(raw, &_pv)
-	err = secret.SecretDelete(Clientset,org, _pv.Name)
+	err = secret.SecretDelete(Clientset, org, _pv.Name)
 
 	if err != nil {
 		log.Error("failed: UserDelete")
@@ -215,7 +215,6 @@ func UserDelete(elkconfig *ElkConfig) {
 		log.Info("User: Delete")
 	}
 }
-
 
 func ElkDelete(elkconfig *ElkConfig) error {
 	IngressDelete(elkconfig)

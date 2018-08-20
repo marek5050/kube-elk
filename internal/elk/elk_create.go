@@ -4,17 +4,16 @@ import (
 	"encoding/json"
 	cm "github.com/marek5050/kube-elk/internal/configmap"
 	deploy "github.com/marek5050/kube-elk/internal/deploy"
+	"github.com/marek5050/kube-elk/internal/ingress"
+	ns "github.com/marek5050/kube-elk/internal/namespace"
 	pv "github.com/marek5050/kube-elk/internal/pv"
 	pvc "github.com/marek5050/kube-elk/internal/pvc"
+	"github.com/marek5050/kube-elk/internal/secret"
 	svc "github.com/marek5050/kube-elk/internal/service"
-	ns "github.com/marek5050/kube-elk/internal/namespace"
 	log "github.com/sirupsen/logrus"
 	apiv1 "k8s.io/api/core/v1"
 	"k8s.io/api/extensions/v1beta1"
-	"github.com/marek5050/kube-elk/internal/ingress"
-	"github.com/marek5050/kube-elk/internal/secret"
 )
-
 
 func init() {
 	//print("init elk_create\n")
@@ -253,7 +252,7 @@ func IngressCreate(elkconfig *ElkConfig) {
 
 	var _pv = &v1beta1.Ingress{}
 	json.Unmarshal(raw, &_pv)
-	_, err = ingress.IngressCreate(Clientset,org, _pv)
+	_, err = ingress.IngressCreate(Clientset, org, _pv)
 
 	if err != nil {
 		log.Error("failed: IngressCreate")
@@ -270,7 +269,7 @@ func UserCreate(elkconfig *ElkConfig) {
 
 	var _pv = &apiv1.Secret{}
 	json.Unmarshal(raw, &_pv)
-	_, err = secret.SecretCreate(Clientset,org, _pv)
+	_, err = secret.SecretCreate(Clientset, org, _pv)
 
 	if err != nil {
 		log.Error("failed: UserCreate")

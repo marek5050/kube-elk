@@ -61,7 +61,7 @@
                 "value": "*"
               }
             ],
-            "image": "docker.elastic.co/elasticsearch/elasticsearch:6.3.1",
+            "image": "docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.1",
             "name": "elasticsearch",
             "volumeMounts": [
               {
@@ -90,7 +90,7 @@
           {
             "name": "nfsvol-data",
             "persistentVolumeClaim": {
-              "claimName": "nfsvol-data"
+              "claimName": "nfs-claim1-$ORG"
             }
           }
         ],

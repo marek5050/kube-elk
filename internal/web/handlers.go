@@ -78,7 +78,7 @@ func ElkGet(w http.ResponseWriter, r *http.Request) {
 		Org: vars["OrgId"],
 	}
 
-	elk, err := elk.ElkGet( elkconfig)
+	elk, err := elk.ElkGet(elkconfig)
 
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")

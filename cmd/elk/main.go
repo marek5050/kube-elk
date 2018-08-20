@@ -18,6 +18,7 @@ import (
 	"flag"
 	"github.com/marek5050/kube-elk/internal/elk"
 	//"github.com/marek5050/kube-elk/internal/httplog"
+	"github.com/marek5050/kube-elk/internal/dotenv"
 	"github.com/marek5050/kube-elk/internal/web"
 	"github.com/sirupsen/logrus"
 	"k8s.io/client-go/kubernetes"
@@ -26,8 +27,7 @@ import (
 	"k8s.io/client-go/util/homedir"
 	"net/http"
 	"path/filepath"
-	"github.com/marek5050/kube-elk/internal/dotenv"
-	)
+)
 
 var log logrus.Logger
 var namespace = "default"
