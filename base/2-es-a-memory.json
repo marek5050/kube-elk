@@ -3,18 +3,21 @@
   "kind": "DaemonSet",
   "metadata": {
     "labels": {
-      "k8s-app": "sysctl-conf"
+      "k8s-app": "sysctl-conf4"
     },
-    "name": "sysctl-conf"
+    "name": "sysctl-conf4"
   },
   "spec": {
     "template": {
       "metadata": {
         "labels": {
-          "k8s-app": "sysctl-conf"
+          "k8s-app": "sysctl-conf4"
         }
       },
       "spec": {
+        "nodeSelector":{
+          "ibm-cloud.kubernetes.io/worker-pool-id":"06694c9e8ed048a4b6866154d277f350-ca1bb2a"
+            },
         "containers": [
           {
             "command": [
@@ -23,7 +26,7 @@
               "sysctl -w vm.max_map_count=262166 && while true; do sleep 86400; done"
             ],
             "image": "busybox:1.26.2",
-            "name": "sysctl-conf",
+            "name": "sysctl-conf5",
             "resources": {
               "limits": {
                 "cpu": "10m",

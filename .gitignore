@@ -6,3 +6,6 @@ cfg
 dist
 build
 main
+bin
+demo_helm
+experiment_elker_helm

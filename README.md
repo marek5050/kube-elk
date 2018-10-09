@@ -18,4 +18,3 @@ Separates stacks via a namespace.
 
 ![diagram](./static/diagram.png)
 
-
